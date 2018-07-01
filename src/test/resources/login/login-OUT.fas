@@ -1,0 +1,20 @@
+
+status: 200
+
+header {
+	Content-Type: "application/json;charset=UTF-8"
+}
+
+body: {
+	user {
+		role: USER
+		enable: true
+		name: options(['Merchant', 'Client'])
+		id: "strSize(id, 36)"
+		merchant_id: "strSize(merchant_id, 36)"
+		open: true
+		username: "loja1"
+	},
+	version: "0.5.16"
+	token: "strSize(151)"
+}

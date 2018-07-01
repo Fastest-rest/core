@@ -1,0 +1,6 @@
+
+header {
+	status: 200
+}
+
+body: TRUE

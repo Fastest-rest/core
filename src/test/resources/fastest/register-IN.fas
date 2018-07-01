@@ -1,0 +1,15 @@
+
+POST: "http://www.google.com"
+
+
+headers {
+	Content-Type: application/json
+}
+
+body {
+
+	name: "Alfred"
+	age: 33
+	document: "123.5436-asdf"
+
+}

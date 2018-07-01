@@ -1,0 +1,15 @@
+
+POST: ":8888/auth"
+
+
+headers {
+	Content-Type: application/x-www-form-urlencoded
+	Accept: application/json
+}
+
+body {
+
+	username: loja1
+	password: loja1
+
+}

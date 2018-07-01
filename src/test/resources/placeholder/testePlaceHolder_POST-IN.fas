@@ -1,0 +1,16 @@
+
+
+POST: "https://jsonplaceholder.typicode.com/posts"
+
+
+headers {
+	Content-type: "application/json"
+}
+
+body {
+
+    title: 'foo'
+    body: 'bar'
+    userId: 1
+
+}
