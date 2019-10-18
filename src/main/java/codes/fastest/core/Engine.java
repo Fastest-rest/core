@@ -1,5 +1,7 @@
 package codes.fastest.core;
 
+import static codes.fastest.util.Const.ENDPOINT;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +15,14 @@ import org.andrejs.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 
 import codes.fastest.core.inspection.FastestResult;
 import codes.fastest.core.inspection.Inspector;
 
-import static codes.fastest.core.Const.*;
+public class Engine {
 
-public class ExecutionManager {
-
-	private static final Logger log = LoggerFactory.getLogger(ExecutionManager.class);
+	private static final Logger log = LoggerFactory.getLogger(Engine.class);
 	
 	private List<ExecutionConfiguration> execConfigList = new ArrayList<>();
 	
@@ -45,10 +44,10 @@ public class ExecutionManager {
 			
 			String endpoint = execConf.getIn().getString(ENDPOINT);
 			
-			log.info("executing {}", endpoint);	
+			log.info("executing {}", endpoint);
 			
-			RequestBuilder requestBuilder = RequestBuilder.fromMethod(execConf);
-			requestBuilder.processHeader();
+			RequestBuilder requestBuilder = RequestBuilder.fromExecConfig(execConf);
+			requestBuilder.processHeaders();
 			requestBuilder.processBody();
 
 			FastestResponse response = requestBuilder.execute();

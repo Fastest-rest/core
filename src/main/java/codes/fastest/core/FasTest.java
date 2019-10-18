@@ -1,5 +1,7 @@
 package codes.fastest.core;
 
+import static codes.fastest.util.Const.*;
+
 import java.io.File;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
@@ -21,48 +23,45 @@ import codes.fastest.core.exception.ConfigurationErrorException;
 import codes.fastest.util.UrlValidator;
 import codes.fastest.util.Valid;
 
-import static codes.fastest.core.Const.*;
+public class FasTest {
 
-public class Fastest {
-	
 	private Params params;
- 
+
 	private List<String> acceptedConfigDash = Arrays.asList(IN, OUT, FLOW);
-	
-	
-	
-	private ExecutionManager execManager;
-	
-	private static final Logger log = LoggerFactory.getLogger(Fastest.class);
-	
-	public Fastest(Params params) {
-		
+
+	private Engine engine;
+
+	private static final Logger log = LoggerFactory.getLogger(FasTest.class);
+
+	public FasTest(Params params) {
+
 		this.params = params;
-		
-		execManager = new ExecutionManager();
-		
+
+		engine = new Engine();
+
 	}
-	
+
 	public void run() {
-		
+
 		log.trace("Running ...");
-		
+
 		validateParams(params);
 		readConfig(params);
-		
-		execManager.execute();
-		
-		execManager.exit();
-		
+
+		engine.execute();
+
+		engine.exit();
+
 	}
-	
+
 	public void validateParams(Params params) {
-		
+
 		log.trace("Validating paramenters ...");
-		
+
 		if(params.configFolder == null) {
 			throw new InvalidParameterException("Config folder is needed.");
 		}
+		
 		File folder = new File(params.configFolder);
 		if(!folder.isDirectory()) {
 			throw new InvalidParameterException("Config folder must be a folder.");
@@ -93,6 +92,7 @@ public class Fastest {
 		}
 		
 		map.forEach((key, value) -> {
+			
 			if(value < 0) throw new ConfigurationErrorException("Malformed fas file pair: " + key + ". Missing IN file.");
 			if(value > 0) throw new ConfigurationErrorException("Malformed fas file pair: " + key + ". Missing OUT file.");
 			
@@ -101,8 +101,9 @@ public class Fastest {
 	}
 	
 	public void validateConfigFile(Config config, String type) {
-		
+
 		if(IN.equals(type)) {
+
 			boolean get     = config.hasPath(GET);
 			boolean post    = config.hasPath(POST);
 			boolean delete  = config.hasPath(DELETE);
@@ -110,15 +111,15 @@ public class Fastest {
 			boolean options = config.hasPath(OPTIONS);
 			boolean head    = config.hasPath(HEAD);
 			boolean patch   = config.hasPath(PATCH);
-			
+
 			//System.out.println(config.root().render());
-			
+
 			if(!Valid.onlyOneTrue(get, post, delete, put, options, head, patch)) {
 				throw new ConfigurationErrorException("IN configuration must have exactly one endpoint configured.");
 			}
-			
+
 		}
-		
+
 	}
 	
 	public Config processInConfig(Config config) {
@@ -181,7 +182,7 @@ public class Fastest {
 			validateConfigFile(inConfig, OUT);
 			
 			ExecutionConfiguration execConfig = new ExecutionConfiguration(rawEndpoint, inConfig, outConfig);
-			execManager.registerExecConfig(execConfig);
+			engine.registerExecConfig(execConfig);
 		}
 		
 	}
@@ -205,7 +206,7 @@ public class Fastest {
 			return;
 		}
 		
-		Fastest fastest = new Fastest(params);
+		FasTest fastest = new FasTest(params);
 		
 		fastest.run();
 		

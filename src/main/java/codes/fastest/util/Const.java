@@ -1,4 +1,4 @@
-package codes.fastest.core;
+package codes.fastest.util;
 
 import java.util.regex.Pattern;
 

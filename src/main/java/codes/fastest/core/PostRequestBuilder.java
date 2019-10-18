@@ -1,6 +1,9 @@
 package codes.fastest.core;
 
-import java.util.regex.Pattern;
+import static codes.fastest.util.Const.BODY;
+import static codes.fastest.util.Const.ENDPOINT;
+import static codes.fastest.util.Const.PATTERN_APP_JSON;
+
 import java.util.stream.Collectors;
 
 import com.mashape.unirest.http.Unirest;
@@ -8,14 +11,10 @@ import com.mashape.unirest.request.HttpRequest;
 import com.mashape.unirest.request.HttpRequestWithBody;
 import com.typesafe.config.ConfigObject;
 
-import static codes.fastest.core.Const.*;
-
 public class PostRequestBuilder extends RequestBuilder {
 
 	private HttpRequestWithBody request;
-	
 
-	
 	public PostRequestBuilder(ExecutionConfiguration execConfig) {
 		super(execConfig);
 		
@@ -29,7 +28,9 @@ public class PostRequestBuilder extends RequestBuilder {
 		boolean hasBody = execConf.getIn().hasPath(BODY);
 		
 		if(hasBody) {
+			
 			ConfigObject bodyObject = execConf.getIn().getObject(BODY);
+			
 			if(hasContentType() && PATTERN_APP_JSON.matcher(getContentType()).find()) {
 				request.body(bodyObject.render());
 			} else {

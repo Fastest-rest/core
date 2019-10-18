@@ -2,11 +2,11 @@ package codes.fastest.core;
 
 import com.typesafe.config.Config;
 
-import codes.fastest.util.UrlValidator;
-
 public class ExecutionConfiguration {
 
 	private String rawEndpoint;
+	
+	private RequestSpecification requestSpecification; 
 	
 	private Config in;
 

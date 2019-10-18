@@ -1,9 +1,9 @@
 package codes.fastest.core;
 
+import static codes.fastest.util.Const.*;
+
 import java.util.List;
 import java.util.Map;
-
-import static codes.fastest.core.Const.*;
 
 public class FastestResponse {
 

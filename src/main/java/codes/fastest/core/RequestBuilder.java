@@ -1,23 +1,25 @@
 package codes.fastest.core;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Pattern;
+
+import static codes.fastest.util.Const.ACCEPT;
+import static codes.fastest.util.Const.CONTENT_TYPE;
+import static codes.fastest.util.Const.GET;
+import static codes.fastest.util.Const.HEADERS;
+import static codes.fastest.util.Const.METHOD;
+import static codes.fastest.util.Const.PATTERN_APP_JSON;
+import static codes.fastest.util.Const.POST;
+
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Set;
-
 import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequest;
 import com.typesafe.config.ConfigObject;
 import com.typesafe.config.ConfigValue;
-
-import static codes.fastest.core.Const.*;
 
 public abstract class RequestBuilder {
 
@@ -35,7 +37,7 @@ public abstract class RequestBuilder {
 		this.execConf = execConf;
 	}
 
-	public void processHeader() {
+	public void processHeaders() {
 	
 		boolean hasHeader = execConf.getIn().hasPath(HEADERS);
 		
@@ -48,7 +50,7 @@ public abstract class RequestBuilder {
 				
 				String value = (String) entry.getValue().unwrapped();
 				
-				if(entry.getKey().equalsIgnoreCase(CONTENT_TYPE)) contentType = value; 
+				if(entry.getKey().equalsIgnoreCase(CONTENT_TYPE)) contentType = value;
 
 				if(entry.getKey().equalsIgnoreCase(ACCEPT)) accept = value; 
 				
@@ -79,8 +81,6 @@ public abstract class RequestBuilder {
 			response.setHeaders(httpResponse.getHeaders());
 			response.setBody(httpResponse.getBody());
 			
-			
-			
 		} catch (UnirestException e) {
 			log.error(e.getMessage(), e);
 		}
@@ -104,14 +104,15 @@ public abstract class RequestBuilder {
 		return accept != null;
 	}
 	
-	public static RequestBuilder fromMethod(ExecutionConfiguration execConfigParam) {
+	public static RequestBuilder fromExecConfig(ExecutionConfiguration execConfig) {
 		
 		RequestBuilder builder = null;
 		
-		String method = execConfigParam.getIn().getString(METHOD);
+		String method = execConfig.getIn().getString(METHOD);
 		
-		if(POST.equals(method)) builder = new PostRequestBuilder(execConfigParam);
-		if(GET.equals(method)) builder = new GetRequestBuilder(execConfigParam);
+		// TODO: needs factory
+		if(POST.equals(method)) builder = new PostRequestBuilder(execConfig);
+		if(GET.equals(method)) builder = new GetRequestBuilder(execConfig);
 		
 		return builder;
 	}
