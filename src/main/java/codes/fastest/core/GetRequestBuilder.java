@@ -9,14 +9,18 @@ public class GetRequestBuilder extends RequestBuilder {
 	private GetRequest request;
 	
 	public GetRequestBuilder(ExecutionConfiguration execConfig) {
+
 		super(execConfig);
-		
+
 		String endpoint = execConf.getIn().getString("endpoint");
+
 		request = Unirest.get(endpoint);
+
 	}
 	
 	@Override
 	public void processBody() {
+
 	}
 
 	@Override

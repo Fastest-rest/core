@@ -8,4 +8,5 @@ import codes.fastest.junit.FastestJunitRunner;
 @RunWith(FastestJunitRunner.class)
 public class RestTest {
 	
+	
 }

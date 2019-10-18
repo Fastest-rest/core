@@ -7,7 +7,6 @@ import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.plus.webapp.EnvConfiguration;
 import org.eclipse.jetty.plus.webapp.PlusConfiguration;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.FragmentConfiguration;
 import org.eclipse.jetty.webapp.JettyWebXmlConfiguration;
@@ -34,12 +33,12 @@ public class FastestJunitRunner extends Runner {
 		this.testClass = testClass;
 		this.description = Description.createSuiteDescription(testClass);
 	}
-	
+
 	@Override
 	public Description getDescription() {
-		
+
 		return description;
-		
+
 	}
 
 	@Override
@@ -89,16 +88,13 @@ public class FastestJunitRunner extends Runner {
         
         server.setHandler(wacHandler);
 
-        
         try {
 			server.start();
 			server.join();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-		
-			
+ 
 		notifier.fireTestFinished(description);
 		
 	}

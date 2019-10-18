@@ -1,6 +1,15 @@
 package codes.fastest.core;
 
-import static codes.fastest.util.Const.*;
+import static codes.fastest.util.Const.DELETE;
+import static codes.fastest.util.Const.FLOW;
+import static codes.fastest.util.Const.GET;
+import static codes.fastest.util.Const.HEAD;
+import static codes.fastest.util.Const.IN;
+import static codes.fastest.util.Const.OPTIONS;
+import static codes.fastest.util.Const.OUT;
+import static codes.fastest.util.Const.PATCH;
+import static codes.fastest.util.Const.POST;
+import static codes.fastest.util.Const.PUT;
 
 import java.io.File;
 import java.security.InvalidParameterException;
@@ -20,12 +29,12 @@ import com.typesafe.config.ConfigRenderOptions;
 import com.typesafe.config.ConfigValueFactory;
 
 import codes.fastest.core.exception.ConfigurationErrorException;
-import codes.fastest.util.UrlValidator;
+import codes.fastest.util.Str;
 import codes.fastest.util.Valid;
 
 public class FasTest {
 
-	private Params params;
+	private FasTestParams params;
 
 	private List<String> acceptedConfigDash = Arrays.asList(IN, OUT, FLOW);
 
@@ -33,7 +42,7 @@ public class FasTest {
 
 	private static final Logger log = LoggerFactory.getLogger(FasTest.class);
 
-	public FasTest(Params params) {
+	public FasTest(FasTestParams params) {
 
 		this.params = params;
 
@@ -54,11 +63,11 @@ public class FasTest {
 
 	}
 
-	public void validateParams(Params params) {
+	public void validateParams(FasTestParams params) {
 
 		log.trace("Validating paramenters ...");
 
-		if(params.configFolder == null) {
+		if(Str.isEmpty(params.configFolder)) {
 			throw new InvalidParameterException("Config folder is needed.");
 		}
 		
@@ -83,9 +92,14 @@ public class FasTest {
 			}
 			
 			int dashIdx = list[i].indexOf('-');
-			if(dashIdx == -1) throw new ConfigurationErrorException("Malformed fas file: " + list[i] + " missing dash.");
+			if(dashIdx == -1) { 
+				throw new ConfigurationErrorException("Malformed fas file: " + list[i] + " missing dash.");
+			}
+			
 			String[] parts = list[i].split("-");
-			if(!acceptedConfigDash.contains(parts[1])) throw new ConfigurationErrorException("Malformed fas file: " + list[i] + " config dash invalid. Options are: " + acceptedConfigDash);
+			if(!acceptedConfigDash.contains(parts[1])) {
+				throw new ConfigurationErrorException("Malformed fas file: " + list[i] + " config dash invalid. Options are: " + acceptedConfigDash);
+			}
 			
 			if(IN.equals(parts[1])) map.merge(parts[0], 1, Integer::sum);
 			if(OUT.equals(parts[1])) map.merge(parts[0], -1, Integer::sum);			
@@ -147,11 +161,11 @@ public class FasTest {
 		String rawEndpoint = config.getString(method);
 		String endpoint = rawEndpoint;
 		
-		String[] schemes = {"http", "https"};
+		/*String[] schemes = {"http", "https"};
 		UrlValidator urlValidator = new UrlValidator(schemes);
 		if (!urlValidator.isValid(rawEndpoint)) {
 			endpoint =  "http://localhost" + rawEndpoint;
-		}
+		}*/
 		
 		// set endpoint in config
 		config = config.withValue("endpoint", ConfigValueFactory.fromAnyRef(endpoint));
@@ -161,7 +175,7 @@ public class FasTest {
 		return config;
 	}
 	
-	public void readConfig(Params params) {
+	public void readConfig(FasTestParams params) {
 		
 		log.trace("Reading configurations ...");
 		
@@ -191,7 +205,7 @@ public class FasTest {
 	
 	public static void main(String[] args) {
 		
-		Params params = new Params();
+		FasTestParams params = new FasTestParams();
 		JCommander jcomm = JCommander.newBuilder().addObject(params).build();
 		try {
 			jcomm.parse(args);
