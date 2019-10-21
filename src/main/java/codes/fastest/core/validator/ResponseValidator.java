@@ -1,6 +1,7 @@
-package codes.fastest.core.inspection;
+package codes.fastest.core.validator;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -17,29 +18,29 @@ import com.typesafe.config.ConfigValue;
 
 import codes.fastest.core.FastestResponse;
 
-public class Inspector {
+public class ResponseValidator {
 
-	private static Inspector INSTANCE = null;
+	private static ResponseValidator INSTANCE = null;
 	
 	private ScriptEngine engine;
 	
-	private static Logger log = LoggerFactory.getLogger(Inspector.class);
+	private static Logger log = LoggerFactory.getLogger(ResponseValidator.class);
 	
-	private Inspector() {
+	private ResponseValidator() {
 		
 		ScriptEngineManager factory = new ScriptEngineManager();
 	    engine = factory.getEngineByName("nashorn");
 		
 	}
 	
-	public static Inspector get() {
+	public static ResponseValidator get() {
 		
-		if(INSTANCE == null) INSTANCE = new Inspector();
+		if(INSTANCE == null) INSTANCE = new ResponseValidator();
 		
 		return INSTANCE;
 	}
 	
-	public static FastestResult inspect(FastestResponse fastestResponse, Config out) {
+	public static FastestResult validate(FastestResponse fastestResponse, Config out) {
 		
 		get();
 		
@@ -63,45 +64,58 @@ public class Inspector {
 			
 			boolean hasHeaders = out.hasPath("headers");
 			if(hasHeaders) {
+				
 				ConfigObject headers = out.getObject("headers");
+				System.out.println();
 				Set<Entry<String, ConfigValue>> entrySet = headers.entrySet();
+
 				for(Entry<String, ConfigValue> entry : entrySet) {
 					String expectedHeaderName = entry.getKey();
 					List<String> responseHeader = fastestResponse.getHeaders().get(entry.getKey());
 					if(responseHeader == null || responseHeader.size() == 0) {
-						result.addError(String.format("Expected header %s not found in response.", expectedHeaderName));
+						String error = String.format("Expected header %s not found in response.", expectedHeaderName);
+						result.addError(error);
 					} else {
-						
-						ConfigValue value = entry.getValue();
-						
+
+						ConfigValue configValue = entry.getValue();
+
+						String value = configValue.render();
+
 						System.out.println("VALUE: " + value);
-						
+
 					}
 				}
 			}
-			
+
 			boolean hasBody = out.hasPath("body");
 			if(hasBody) {
-				
+
 				Set<Entry<String, ConfigValue>> entrySetOut = out.getObject("body").entrySet();
 				for(Entry<String, ConfigValue> entryOut : entrySetOut) {
-					
+
 					System.out.println(entryOut.getKey() + " -> " + entryOut.getValue().unwrapped());
 
 					//INSTANCE.engine.eval("response");
 
 				}
 			}
-			
+
 			log.info("");
-			log.info("RESPONSE =============== =============== ===============");
+			log.info("RESPONSE HEADER =============== =============== ===============");
+			Map<String, List<String>> headers = fastestResponse.getHeaders();
+			Set<Entry<String, List<String>>> entrySetHeaders = headers.entrySet();
+			for(Entry<String, List<String>> entry : entrySetHeaders) {
+				System.out.println(entry.getKey() + " -> " + entry.getValue());
+			}
+
+			log.info("RESPONSE BODY   =============== =============== ===============");
 			Set<Entry<String, Object>> entrySet = json.entrySet();
 			for(Entry<String, Object> entry : entrySet) {
 				System.out.println(entry.getKey() + " -> " + entry.getValue());
 			}
-			
+
 			log.info("");
-			log.info("RESULTS =============== =============== ===============");
+			log.info("RESULTS         =============== =============== ===============");
 			for(String error : result.getErrors()) {
 				System.out.println(error);
 			}

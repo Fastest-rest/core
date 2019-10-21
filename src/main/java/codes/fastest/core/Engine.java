@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mashape.unirest.http.Unirest;
 
-import codes.fastest.core.inspection.FastestResult;
-import codes.fastest.core.inspection.Inspector;
+import codes.fastest.core.validator.FastestResult;
+import codes.fastest.core.validator.ResponseValidator;
 
 public class Engine {
 
@@ -52,7 +52,7 @@ public class Engine {
 
 			FastestResponse response = requestBuilder.execute();
 			
-			FastestResult result = Inspector.inspect(response, execConf.getOut());
+			FastestResult result = ResponseValidator.validate(response, execConf.getOut());
 			
 			listResults.add(result);
 

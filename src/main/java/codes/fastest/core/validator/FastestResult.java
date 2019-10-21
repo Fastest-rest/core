@@ -1,4 +1,4 @@
-package codes.fastest.core.inspection;
+package codes.fastest.core.validator;
 
 import java.util.ArrayList;
 import java.util.Collections;
