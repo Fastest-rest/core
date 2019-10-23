@@ -1,19 +1,19 @@
 package codes.fastest.core.validator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class FastestResult {
 
-	private List<String> errors = new ArrayList<>();
+	private List<FieldResult> fieldResults = new ArrayList<>();
 	
-	public void addError(String error) {
-		errors.add(error);
+
+	public List<FieldResult> getFieldResults() {
+		return fieldResults;
 	}
-	
-	public List<String> getErrors() {
-		return Collections.unmodifiableList(errors);
+
+	public void setFieldResults(List<FieldResult> fieldResults) {
+		this.fieldResults = fieldResults;
 	}
 	
 }

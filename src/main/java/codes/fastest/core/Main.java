@@ -2,6 +2,8 @@ package codes.fastest.core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -11,11 +13,14 @@ import org.andrejs.json.Json;
 import org.json.JSONObject;
 import org.mvel2.MVEL;
 
-import codes.fastest.expval.nativeimpl.ExpressionEvaluatorNative;
+import codes.fastest.expval.ExpressionEvaluatorNative;
+
 
 public class Main {
 
 	public static void main(String[] args) throws ScriptException {
+		
+
 		
 		Json obj = Json.of.string("{port: 80, name: 'test', value: null}");
 		
@@ -47,13 +52,13 @@ public class Main {
 		System.exit(1);*/
 		
 		
-		ExpressionEvaluatorNative eval = new ExpressionEvaluatorNative();
+		/*ExpressionEvaluatorNative eval = new ExpressionEvaluatorNative();
 		
-		boolean x = eval.evaluate("isInt", "x");
+		boolean x = eval.evaluate("size(2, 5)", "x");
 		
 		System.out.println(x);
 		
-		System.exit(1);
+		System.exit(1);*/
 		
 		FasTestParams params = new FasTestParams();
 		params.configFolder = "/home/heitor.machado/devel/temp_test/endpoint";

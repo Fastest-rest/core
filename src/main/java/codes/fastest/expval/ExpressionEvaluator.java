@@ -1,5 +1,9 @@
 package codes.fastest.expval;
 
-public class ExpressionEvaluator {
+import codes.fastest.core.validator.FieldResult;
 
+public interface ExpressionEvaluator {
+
+	public FieldResult evaluate(String fieldName, Object expression, Object target);
+	
 }
