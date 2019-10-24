@@ -24,7 +24,6 @@ public class Equals implements ValidationFunction {
 		
 		boolean valid = attempt.getValue().equals(value);
 		
-		
 		FieldResult result = new FieldResult();
 		result.setValid(valid);
 		result.setRule("Equals");
