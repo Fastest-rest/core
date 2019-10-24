@@ -1,9 +1,9 @@
-package io.testful.expval;
+package io.testful.core.expval;
 
+import io.testful.core.expval.nativeimpl.RuleParser;
+import io.testful.core.expval.nativeimpl.ValidationAttempt;
+import io.testful.core.expval.nativeimpl.ValidationFunction;
 import io.testful.core.validator.FieldResult;
-import io.testful.expval.nativeimpl.RuleParser;
-import io.testful.expval.nativeimpl.ValidationAttempt;
-import io.testful.expval.nativeimpl.ValidationFunction;
 
 public class ExpressionEvaluatorNative implements ExpressionEvaluator {
 

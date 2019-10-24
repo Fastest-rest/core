@@ -15,8 +15,8 @@ import com.typesafe.config.ConfigValue;
 import com.typesafe.config.ConfigValueType;
 
 import io.testful.core.FastestResponse;
-import io.testful.expval.ExpressionEvaluator;
-import io.testful.expval.ExpressionEvaluatorNative;
+import io.testful.core.expval.ExpressionEvaluator;
+import io.testful.core.expval.ExpressionEvaluatorNative;
 
 public class ResponseValidator {
 

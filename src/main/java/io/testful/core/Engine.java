@@ -1,6 +1,6 @@
 package io.testful.core;
 
-import static io.testful.util.Const.ENDPOINT;
+import static io.testful.core.util.Const.ENDPOINT;
 
 import java.io.IOException;
 import java.util.ArrayList;

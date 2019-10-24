@@ -2,13 +2,13 @@ package io.testful.core;
 
 import java.util.Map.Entry;
 
-import static io.testful.util.Const.ACCEPT;
-import static io.testful.util.Const.CONTENT_TYPE;
-import static io.testful.util.Const.GET;
-import static io.testful.util.Const.HEADERS;
-import static io.testful.util.Const.METHOD;
-import static io.testful.util.Const.PATTERN_APP_JSON;
-import static io.testful.util.Const.POST;
+import static io.testful.core.util.Const.ACCEPT;
+import static io.testful.core.util.Const.CONTENT_TYPE;
+import static io.testful.core.util.Const.GET;
+import static io.testful.core.util.Const.HEADERS;
+import static io.testful.core.util.Const.METHOD;
+import static io.testful.core.util.Const.PATTERN_APP_JSON;
+import static io.testful.core.util.Const.POST;
 
 import java.util.Set;
 

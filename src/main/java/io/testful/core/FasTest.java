@@ -1,15 +1,15 @@
 package io.testful.core;
 
-import static io.testful.util.Const.DELETE;
-import static io.testful.util.Const.FLOW;
-import static io.testful.util.Const.GET;
-import static io.testful.util.Const.HEAD;
-import static io.testful.util.Const.IN;
-import static io.testful.util.Const.OPTIONS;
-import static io.testful.util.Const.OUT;
-import static io.testful.util.Const.PATCH;
-import static io.testful.util.Const.POST;
-import static io.testful.util.Const.PUT;
+import static io.testful.core.util.Const.DELETE;
+import static io.testful.core.util.Const.FLOW;
+import static io.testful.core.util.Const.GET;
+import static io.testful.core.util.Const.HEAD;
+import static io.testful.core.util.Const.IN;
+import static io.testful.core.util.Const.OPTIONS;
+import static io.testful.core.util.Const.OUT;
+import static io.testful.core.util.Const.PATCH;
+import static io.testful.core.util.Const.POST;
+import static io.testful.core.util.Const.PUT;
 
 import java.io.File;
 import java.security.InvalidParameterException;
@@ -29,8 +29,8 @@ import com.typesafe.config.ConfigRenderOptions;
 import com.typesafe.config.ConfigValueFactory;
 
 import io.testful.core.exception.ConfigurationErrorException;
-import io.testful.util.Str;
-import io.testful.util.Valid;
+import io.testful.core.util.Str;
+import io.testful.core.util.Valid;
 
 public class FasTest {
 

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package io.testful.util;
+package io.testful.core.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;

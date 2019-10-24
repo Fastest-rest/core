@@ -1,4 +1,4 @@
-package io.testful.util;
+package io.testful.core.util;
 
 import java.util.regex.Pattern;
 

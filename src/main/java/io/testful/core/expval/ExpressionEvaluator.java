@@ -1,4 +1,4 @@
-package io.testful.expval;
+package io.testful.core.expval;
 
 import io.testful.core.validator.FieldResult;
 

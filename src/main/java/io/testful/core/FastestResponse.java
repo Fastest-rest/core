@@ -1,6 +1,6 @@
 package io.testful.core;
 
-import static io.testful.util.Const.*;
+import static io.testful.core.util.Const.*;
 
 import java.util.List;
 import java.util.Map;

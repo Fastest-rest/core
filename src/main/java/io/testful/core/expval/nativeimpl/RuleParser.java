@@ -1,4 +1,4 @@
-package io.testful.expval.nativeimpl;
+package io.testful.core.expval.nativeimpl;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,13 +9,13 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.testful.expval.nativeimpl.validations.Between;
-import io.testful.expval.nativeimpl.validations.Equals;
-import io.testful.expval.nativeimpl.validations.IsInt;
-import io.testful.expval.nativeimpl.validations.Min;
-import io.testful.expval.nativeimpl.validations.NotEmpty;
-import io.testful.expval.nativeimpl.validations.NotNull;
-import io.testful.expval.nativeimpl.validations.Size;
+import io.testful.core.expval.nativeimpl.validations.Between;
+import io.testful.core.expval.nativeimpl.validations.Equals;
+import io.testful.core.expval.nativeimpl.validations.IsInt;
+import io.testful.core.expval.nativeimpl.validations.Min;
+import io.testful.core.expval.nativeimpl.validations.NotEmpty;
+import io.testful.core.expval.nativeimpl.validations.NotNull;
+import io.testful.core.expval.nativeimpl.validations.Size;
 
 public class RuleParser {
 

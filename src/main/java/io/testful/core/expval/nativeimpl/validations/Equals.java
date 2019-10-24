@@ -1,11 +1,11 @@
-package io.testful.expval.nativeimpl.validations;
+package io.testful.core.expval.nativeimpl.validations;
 
 import java.util.Arrays;
 import java.util.List;
 
+import io.testful.core.expval.nativeimpl.ValidationAttempt;
+import io.testful.core.expval.nativeimpl.ValidationFunction;
 import io.testful.core.validator.FieldResult;
-import io.testful.expval.nativeimpl.ValidationAttempt;
-import io.testful.expval.nativeimpl.ValidationFunction;
 
 public class Equals implements ValidationFunction {
 

@@ -1,11 +1,11 @@
-package io.testful.expval.nativeimpl.validations;
+package io.testful.core.expval.nativeimpl.validations;
 
 import java.util.Arrays;
 import java.util.List;
 
+import io.testful.core.expval.nativeimpl.ValidationAttempt;
+import io.testful.core.expval.nativeimpl.ValidationFunction;
 import io.testful.core.validator.FieldResult;
-import io.testful.expval.nativeimpl.ValidationAttempt;
-import io.testful.expval.nativeimpl.ValidationFunction;
 
 public class Size implements ValidationFunction {
 
@@ -25,7 +25,7 @@ public class Size implements ValidationFunction {
 		
 			Integer min = Integer.parseInt((String) attempt.getRuleParams().get("min"));
 			Integer max = Integer.parseInt((String) attempt.getRuleParams().get("max"));
-			
+
 			int length = attempt.getValue().toString().length();
 			
 			valid = length >= min && length <= max; 
