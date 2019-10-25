@@ -1,0 +1,5 @@
+https://tools.ietf.org/html/draft-zyp-json-schema-04
+
+https://goessner.net/articles/JsonPath/
+
+http://mvel.documentnode.com/

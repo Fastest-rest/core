@@ -6,7 +6,7 @@ import java.util.List;
 import com.beust.jcommander.Parameter;
 
 
-public class FasTestParams {
+public class TestfulParams {
 
 	@Parameter
 	public List<String> parameters = new ArrayList<>();

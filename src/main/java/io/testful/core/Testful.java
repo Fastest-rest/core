@@ -32,17 +32,17 @@ import io.testful.core.exception.ConfigurationErrorException;
 import io.testful.core.util.Str;
 import io.testful.core.util.Valid;
 
-public class FasTest {
+public class Testful {
 
-	private FasTestParams params;
+	private TestfulParams params;
 
 	private List<String> acceptedConfigDash = Arrays.asList(IN, OUT, FLOW);
 
 	private Engine engine;
 
-	private static final Logger log = LoggerFactory.getLogger(FasTest.class);
+	private static final Logger log = LoggerFactory.getLogger(Testful.class);
 
-	public FasTest(FasTestParams params) {
+	public Testful(TestfulParams params) {
 
 		this.params = params;
 
@@ -63,7 +63,7 @@ public class FasTest {
 
 	}
 
-	public void validateParams(FasTestParams params) {
+	public void validateParams(TestfulParams params) {
 
 		log.trace("Validating paramenters ...");
 
@@ -175,7 +175,7 @@ public class FasTest {
 		return config;
 	}
 	
-	public void readConfig(FasTestParams params) {
+	public void readConfig(TestfulParams params) {
 		
 		log.trace("Reading configurations ...");
 		
@@ -205,7 +205,7 @@ public class FasTest {
 	
 	public static void main(String[] args) {
 		
-		FasTestParams params = new FasTestParams();
+		TestfulParams params = new TestfulParams();
 		JCommander jcomm = JCommander.newBuilder().addObject(params).build();
 		try {
 			jcomm.parse(args);
@@ -220,7 +220,7 @@ public class FasTest {
 			return;
 		}
 		
-		FasTest fastest = new FasTest(params);
+		Testful fastest = new Testful(params);
 		
 		fastest.run();
 		
