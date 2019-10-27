@@ -21,8 +21,6 @@ public class Equals implements ValidationFunction {
 		
 		Object value = attempt.getRuleParams().get("value");
 
-		System.out.println("EQUALS: " + attempt.getValue().getClass() + "|" + attempt.getValue() + " => (" + value.getClass() + ")" + value);
-		
 		boolean valid = attempt.getValue().equals(value);
 		
 		FieldResult result = new FieldResult();

@@ -23,15 +23,15 @@ import com.typesafe.config.ConfigValue;
 
 public abstract class RequestBuilder {
 
+	
 	protected ExecutionConfiguration execConf;
 	
 	protected String contentType = null;
 
 	protected String accept = null;
 	
-
-	
 	private static final Logger log = LoggerFactory.getLogger(RequestBuilder.class);
+	
 	
 	public RequestBuilder(ExecutionConfiguration execConf) {
 		this.execConf = execConf;
@@ -39,11 +39,11 @@ public abstract class RequestBuilder {
 
 	public void processHeaders() {
 	
-		boolean hasHeader = execConf.getIn().hasPath(HEADERS);
+		boolean hasHeader = execConf.getRequestSpecification().hasPath(HEADERS);
 		
 		if(hasHeader) {
 			
-			ConfigObject header = execConf.getIn().getObject(HEADERS);
+			ConfigObject header = execConf.getRequestSpecification().getObject(HEADERS);
 			
 			Set<Entry<String, ConfigValue>> entrySet = header.entrySet();
 			for(Entry<String, ConfigValue> entry : entrySet) {
@@ -66,7 +66,7 @@ public abstract class RequestBuilder {
 	public abstract void processBody();
 
 	public FastestResponse execute() {
-	
+
 		FastestResponse response = new FastestResponse();
 		
 		try {
@@ -108,7 +108,7 @@ public abstract class RequestBuilder {
 		
 		RequestBuilder builder = null;
 		
-		String method = execConfig.getIn().getString(METHOD);
+		String method = execConfig.getRequestSpecification().getString(METHOD);
 		
 		// TODO: needs factory
 		if(POST.equals(method)) builder = new PostRequestBuilder(execConfig);

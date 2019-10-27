@@ -15,5 +15,11 @@ public class FastestResult {
 	public void setFieldResults(List<FieldResult> fieldResults) {
 		this.fieldResults = fieldResults;
 	}
+
+	public boolean isAllValid() {
+		
+		return getFieldResults().stream().allMatch(fr -> fr.isValid());
+		
+	}
 	
 }

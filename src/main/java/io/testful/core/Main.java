@@ -20,7 +20,8 @@ public class Main {
 		System.exit(1);*/
 
 		TestfulParams params = new TestfulParams();
-		params.configFolder = "/home/heitor.machado/devel/temp_test/endpoint";
+		//params.configFolder = "/home/heitor.machado/devel/temp_test/endpoint";
+		params.configFolder = "D:/DEVEL/projetos/Testful/src/main/resources/jsonplaceholder/todo";
 
 		Testful testfull = new Testful(params);
 

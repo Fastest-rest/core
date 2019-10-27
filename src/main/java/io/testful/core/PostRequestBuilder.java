@@ -18,18 +18,18 @@ public class PostRequestBuilder extends RequestBuilder {
 	public PostRequestBuilder(ExecutionConfiguration execConfig) {
 		super(execConfig);
 		
-		String endpoint = execConf.getIn().getString(ENDPOINT);
+		String endpoint = execConf.getRequestSpecification().getString(ENDPOINT);
 		request = Unirest.post(endpoint);
 	}
 	
 	@Override
 	public void processBody() {
 		
-		boolean hasBody = execConf.getIn().hasPath(BODY);
+		boolean hasBody = execConf.getRequestSpecification().hasPath(BODY);
 		
 		if(hasBody) {
 			
-			ConfigObject bodyObject = execConf.getIn().getObject(BODY);
+			ConfigObject bodyObject = execConf.getRequestSpecification().getObject(BODY);
 			
 			if(hasContentType() && PATTERN_APP_JSON.matcher(getContentType()).find()) {
 				request.body(bodyObject.render());

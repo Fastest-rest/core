@@ -170,7 +170,7 @@ public class Testful {
 		// set endpoint in config
 		config = config.withValue("endpoint", ConfigValueFactory.fromAnyRef(endpoint));
 		
-		System.out.println(config.root().render(ConfigRenderOptions.defaults().setComments(false).setOriginComments(false)));
+		//System.out.println(config.root().render(ConfigRenderOptions.defaults().setComments(false).setOriginComments(false)));
 		
 		return config;
 	}
@@ -207,10 +207,13 @@ public class Testful {
 		
 		TestfulParams params = new TestfulParams();
 		JCommander jcomm = JCommander.newBuilder().addObject(params).build();
+		
 		try {
+		
 			jcomm.parse(args);
+		
 		} catch(ParameterException e) {
-			System.out.println(e.getMessage());
+			log.error(e.getMessage(), e);
 			jcomm.usage();
 			return;
 		}

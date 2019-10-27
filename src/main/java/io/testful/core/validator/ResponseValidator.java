@@ -77,7 +77,7 @@ public class ResponseValidator {
 
 						String value = configValue.render();
 
-						System.out.println("VALUE: " + value);
+						//System.out.println("VALUE: " + value);
 
 					}
 				}
@@ -129,6 +129,10 @@ public class ResponseValidator {
 				else
 					log.info(res.getMessage());
 			}
+
+			log.info("");
+			log.info("FINAL        =============== =============== ===============");
+			log.info("=> " + result.isAllValid());
 			
 		}
 		

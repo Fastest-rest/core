@@ -2,10 +2,10 @@ package codes.fastest.core;
 
 import org.junit.runner.RunWith;
 
-import io.testful.junit.FastestJunitRunner;
+import io.testful.junit.TestfulJunitRunner;
 
 
-@RunWith(FastestJunitRunner.class)
+@RunWith(TestfulJunitRunner.class)
 public class RestTest {
 	
 	

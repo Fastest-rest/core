@@ -12,7 +12,7 @@ public class GetRequestBuilder extends RequestBuilder {
 
 		super(execConfig);
 
-		String endpoint = execConf.getIn().getString("endpoint");
+		String endpoint = execConf.getRequestSpecification().getString("endpoint");
 
 		request = Unirest.get(endpoint);
 

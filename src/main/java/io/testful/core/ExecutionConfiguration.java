@@ -6,20 +6,18 @@ public class ExecutionConfiguration {
 
 	private String rawEndpoint;
 	
-	private RequestSpecification requestSpecification; 
-	
-	private Config in;
+	private Config requestSpecification;
 
-	private Config out;
+	private Config responseValidation;
 	
 	public ExecutionConfiguration() {
 	}
 	
-	public ExecutionConfiguration(String rawEndpoint, Config in, Config out) {
+	public ExecutionConfiguration(String rawEndpoint, Config in, Config responseValidation) {
 		super();
 		this.rawEndpoint = rawEndpoint;
-		this.in = in;
-		this.out = out;
+		this.requestSpecification = in;
+		this.responseValidation = responseValidation;
 	}
 	
 	public String getRawEndpoint() {
@@ -30,24 +28,20 @@ public class ExecutionConfiguration {
 		this.rawEndpoint = rawEndpoint;
 	}
 
-	public Config getIn() {
-		return in;
+	public Config getRequestSpecification() {
+		return requestSpecification;
 	}
 
-	public void setIn(Config in) {
-		this.in = in;
+	public void setRequestSpecification(Config requestSpecification) {
+		this.requestSpecification = requestSpecification;
 	}
 
-	public Config getOut() {
-		return out;
+	public Config getResponseValidation() {
+		return responseValidation;
 	}
 
-	public void setOut(Config out) {
-		this.out = out;
+	public void setResponseValidation(Config responseValidation) {
+		this.responseValidation = responseValidation;
 	}
 
-
-	
-	
-	
 }
