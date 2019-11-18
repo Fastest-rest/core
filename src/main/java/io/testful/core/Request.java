@@ -115,7 +115,7 @@ public abstract class Request {
 			String method = execConfig.getRequestSpecification().getString(METHOD);
 			
 			// TODO: needs factory
-			if(POST.equals(method)) req = new PostRequest(execConfig);
+			if(POST.equals(method)) req = new TestfulPostRequest(execConfig);
 			if(GET.equals(method)) req = new TestfulGetRequest(execConfig);
 			
 			req.processHeaders();
