@@ -36,7 +36,7 @@ public class Engine {
 		
 		execConfigList.forEach(execConf -> {
 			
-			String endpoint = execConf.getIn().getString(ENDPOINT);
+			String endpoint = execConf.getRequestSpecification().getString(ENDPOINT);
 			
 			log.info("executing {}", endpoint);
 			
@@ -44,9 +44,9 @@ public class Engine {
 
 			FastestResponse response = requestBuilder.execute();
 			
-			System.out.println(response.getBody());
+			//System.out.println(response.getBody());
 			
-			FastestResult result = ResponseValidator.validate(response, execConf.getOut());
+			FastestResult result = ResponseValidator.validate(response, execConf.getResponseValidation());
 			
 			listResults.add(result);
 

@@ -12,7 +12,7 @@ public class TestfulGetRequest extends Request {
 
 		super(execConfig);
 
-		String endpoint = execConf.getIn().getString("endpoint");
+		String endpoint = execConf.getRequestSpecification().getString("endpoint");
 
 		request = Unirest.get(endpoint);
 

@@ -23,6 +23,7 @@ import com.typesafe.config.ConfigValue;
 
 public abstract class Request {
 
+	
 	protected ExecutionConfiguration execConf;
 	
 	protected String contentType = null;
@@ -30,20 +31,20 @@ public abstract class Request {
 	protected String accept = null;
 	
 
-	
 	private static final Logger log = LoggerFactory.getLogger(Request.class);
 	
 	public Request(ExecutionConfiguration execConf) {
+
 		this.execConf = execConf;
 	}
 
 	public void processHeaders() {
 	
-		boolean hasHeader = execConf.getIn().hasPath(HEADERS);
+		boolean hasHeader = execConf.getRequestSpecification().hasPath(HEADERS);
 		
 		if(hasHeader) {
 			
-			ConfigObject header = execConf.getIn().getObject(HEADERS);
+			ConfigObject header = execConf.getRequestSpecification().getObject(HEADERS);
 			
 			Set<Entry<String, ConfigValue>> entrySet = header.entrySet();
 			for(Entry<String, ConfigValue> entry : entrySet) {
@@ -66,7 +67,7 @@ public abstract class Request {
 	public abstract void processBody();
 
 	public FastestResponse execute() {
-	
+
 		FastestResponse response = new FastestResponse();
 		
 		try {
@@ -106,11 +107,12 @@ public abstract class Request {
 	
 	public static class Builder {
 		
+
 		public static Request fromExecConfig(ExecutionConfiguration execConfig) {
 			
 			Request req = null;
 			
-			String method = execConfig.getIn().getString(METHOD);
+			String method = execConfig.getRequestSpecification().getString(METHOD);
 			
 			// TODO: needs factory
 			if(POST.equals(method)) req = new PostRequest(execConfig);
@@ -121,6 +123,9 @@ public abstract class Request {
 			
 			return req;
 		}
+
+	
+
 		
 	} 
 	

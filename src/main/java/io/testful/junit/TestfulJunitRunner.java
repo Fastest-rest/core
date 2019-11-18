@@ -21,15 +21,16 @@ import org.junit.runner.notification.RunNotifier;
 
 import io.testful.core.exception.ConfigurationErrorException;
 
-public class FastestJunitRunner extends Runner {
+public class TestfulJunitRunner extends Runner {
 
 	private Class<?> testClass;
 	private Description description;
 
-	public FastestJunitRunner() {
+	public TestfulJunitRunner() {
+		System.out.println("CONTRUCTOR");
 	}
 
-	public FastestJunitRunner(Class<?> testClass) {
+	public TestfulJunitRunner(Class<?> testClass) {
 		this.testClass = testClass;
 		this.description = Description.createSuiteDescription(testClass);
 	}
@@ -44,12 +45,14 @@ public class FastestJunitRunner extends Runner {
 	@Override
 	public void run(RunNotifier notifier) {
 		
+		System.out.println("RUN");
+		
 		notifier.fireTestRunStarted(description);
 		
-		URL resource = testClass.getClassLoader().getResource("fastest");
+		URL resource = testClass.getClassLoader().getResource("testful");
 		
 		if(resource == null) {
-			Failure failure = new Failure(description, new ConfigurationErrorException("Missing fastest folder."));
+			Failure failure = new Failure(description, new ConfigurationErrorException("Missing testful folder."));
 			notifier.fireTestFailure(failure);
 			notifier.fireTestFinished(description);
 			return;
@@ -58,7 +61,7 @@ public class FastestJunitRunner extends Runner {
 		File fastest = new File(resource.getFile());
 		
 		if(!fastest.exists() || !fastest.isDirectory()) {
-			Failure failure = new Failure(description, new ConfigurationErrorException("Missing fastest folder."));
+			Failure failure = new Failure(description, new ConfigurationErrorException("Missing testful folder."));
 			notifier.fireTestFailure(failure);
 			notifier.fireTestFinished(description);
 			return;
