@@ -40,9 +40,7 @@ public class Engine {
 			
 			log.info("executing {}", endpoint);
 			
-			RequestBuilder requestBuilder = RequestBuilder.fromExecConfig(execConf);
-			requestBuilder.processHeaders();
-			requestBuilder.processBody();
+			Request requestBuilder = Request.Builder.fromExecConfig(execConf);
 
 			FastestResponse response = requestBuilder.execute();
 			

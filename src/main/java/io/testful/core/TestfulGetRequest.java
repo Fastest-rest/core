@@ -4,11 +4,11 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.request.GetRequest;
 import com.mashape.unirest.request.HttpRequest;
 
-public class GetRequestBuilder extends RequestBuilder {
+public class TestfulGetRequest extends Request {
 
 	private GetRequest request;
 	
-	public GetRequestBuilder(ExecutionConfiguration execConfig) {
+	public TestfulGetRequest(ExecutionConfiguration execConfig) {
 
 		super(execConfig);
 

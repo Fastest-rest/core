@@ -21,7 +21,7 @@ import com.mashape.unirest.request.HttpRequest;
 import com.typesafe.config.ConfigObject;
 import com.typesafe.config.ConfigValue;
 
-public abstract class RequestBuilder {
+public abstract class Request {
 
 	protected ExecutionConfiguration execConf;
 	
@@ -31,9 +31,9 @@ public abstract class RequestBuilder {
 	
 
 	
-	private static final Logger log = LoggerFactory.getLogger(RequestBuilder.class);
+	private static final Logger log = LoggerFactory.getLogger(Request.class);
 	
-	public RequestBuilder(ExecutionConfiguration execConf) {
+	public Request(ExecutionConfiguration execConf) {
 		this.execConf = execConf;
 	}
 
@@ -104,18 +104,27 @@ public abstract class RequestBuilder {
 		return accept != null;
 	}
 	
-	public static RequestBuilder fromExecConfig(ExecutionConfiguration execConfig) {
+	public static class Builder {
 		
-		RequestBuilder builder = null;
+		public static Request fromExecConfig(ExecutionConfiguration execConfig) {
+			
+			Request req = null;
+			
+			String method = execConfig.getIn().getString(METHOD);
+			
+			// TODO: needs factory
+			if(POST.equals(method)) req = new PostRequest(execConfig);
+			if(GET.equals(method)) req = new TestfulGetRequest(execConfig);
+			
+			req.processHeaders();
+			req.processBody();
+			
+			return req;
+		}
 		
-		String method = execConfig.getIn().getString(METHOD);
-		
-		// TODO: needs factory
-		if(POST.equals(method)) builder = new PostRequestBuilder(execConfig);
-		if(GET.equals(method)) builder = new GetRequestBuilder(execConfig);
-		
-		return builder;
-	}
+	} 
+	
+
 	
 	
 	

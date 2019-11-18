@@ -11,11 +11,11 @@ import com.mashape.unirest.request.HttpRequest;
 import com.mashape.unirest.request.HttpRequestWithBody;
 import com.typesafe.config.ConfigObject;
 
-public class PostRequestBuilder extends RequestBuilder {
+public class PostRequest extends Request {
 
 	private HttpRequestWithBody request;
 
-	public PostRequestBuilder(ExecutionConfiguration execConfig) {
+	public PostRequest(ExecutionConfiguration execConfig) {
 		super(execConfig);
 		
 		String endpoint = execConf.getIn().getString(ENDPOINT);
